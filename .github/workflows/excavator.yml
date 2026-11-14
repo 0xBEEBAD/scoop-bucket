@@ -1,0 +1,22 @@
+# Checks for a new Arke release every day and updates bucket/arke.json (version, URLs, hashes).
+name: excavator
+
+on:
+  schedule:
+    - cron: "20 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  excavate:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: update manifests
+        uses: ScoopInstaller/GithubActions@main
+        if: github.ref == 'refs/heads/main'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SKIP_UPDATED: "1"
