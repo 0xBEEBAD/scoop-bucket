@@ -1,9 +1,9 @@
-# Checks for a new Arke release every day and updates bucket/arke.json (version, URLs, hashes).
+# Checks for a new Arke release every 3 hours and updates bucket/arke.json (version, URLs, hashes).
 name: excavator
 
 on:
   schedule:
-    - cron: "20 3 * * *"
+    - cron: "20 */3 * * *"
   workflow_dispatch:
 
 permissions:
